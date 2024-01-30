@@ -7,17 +7,17 @@ namespace API.Controllers;
 
 public class UsersController : BaseApiController
 {
-    private readonly DataContext context;
+    private readonly DataContext _context;
 
     public UsersController(DataContext context)
     {
-        this.context = context;
+        _context = context;
     }
 
     [HttpGet]
     public async Task<ActionResult<IEnumerable<AppUser>>> GetUsers()
     {
-        var users = await context.Users.ToListAsync();
+        var users = await _context.Users.ToListAsync();
 
         return users;
     }
@@ -25,6 +25,6 @@ public class UsersController : BaseApiController
     [HttpGet("{id}")] // /api/users/3
     public async Task<ActionResult<AppUser>> GetUser(int id)
     {
-        return await context.Users.FindAsync(id);
+        return await _context.Users.FindAsync(id);
     }
 }
